@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import {
    Card,
    CardContent,
@@ -9,6 +9,7 @@ import {
    RadioGroup,
 } from "@mui/material";
 import { Layout } from "../components/layouts";
+import Cookies from "js-cookie";
 
 const ThemeChagerPage: FC = () => {
    const [currentTheme, setCurrentTheme] = useState("light");
@@ -16,7 +17,10 @@ const ThemeChagerPage: FC = () => {
    const onThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
       const seletedTheme = event.target.value;
       setCurrentTheme(seletedTheme);
+      Cookies.set("theme", seletedTheme);
    };
+
+   // useEffect(() => {}, []);
 
    return (
       <Layout>
