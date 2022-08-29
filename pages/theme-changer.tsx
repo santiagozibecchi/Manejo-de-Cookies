@@ -1,4 +1,6 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import { GetServerSideProps } from "next";
+
 import {
    Card,
    CardContent,
@@ -11,7 +13,8 @@ import {
 import { Layout } from "../components/layouts";
 import Cookies from "js-cookie";
 
-const ThemeChagerPage: FC = () => {
+const ThemeChagerPage: FC = (props) => {
+   console.log({ props });
    const [currentTheme, setCurrentTheme] = useState("light");
 
    const onThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +53,24 @@ const ThemeChagerPage: FC = () => {
          </Card>
       </Layout>
    );
+};
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+   // La request es la solicitud del cliente
+
+   // const cookies = req.cookies
+   const { theme = "light", name = "no name" } = req.cookies;
+
+   console.log(req);
+   return {
+      props: {
+         theme,
+         name,
+      },
+   };
 };
 
 export default ThemeChagerPage;
