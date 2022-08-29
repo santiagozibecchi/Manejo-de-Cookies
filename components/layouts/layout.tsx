@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren } from "react";
 import Head from "next/head";
 
-const layout: FC<PropsWithChildren> = ({ children }) => {
+export const layout: FC<PropsWithChildren> = ({ children }) => {
    return (
       <>
          <Head></Head>
@@ -12,5 +12,3 @@ const layout: FC<PropsWithChildren> = ({ children }) => {
       </>
    );
 };
-
-export default layout;
