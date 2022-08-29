@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 import {
    Card,
    CardContent,
@@ -10,13 +10,12 @@ import {
 } from "@mui/material";
 import { Layout } from "../components/layouts";
 
-const ThemeChagerPage = () => {
+const ThemeChagerPage: FC = () => {
    const [currentTheme, setCurrentTheme] = useState("light");
 
    const onThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
       const seletedTheme = event.target.value;
       setCurrentTheme(seletedTheme);
-      console.log(seletedTheme);
    };
 
    return (
@@ -29,7 +28,7 @@ const ThemeChagerPage = () => {
                      <FormControlLabel
                         value="light"
                         control={<Radio />}
-                        label="light"
+                        label="Light"
                      />
                      <FormControlLabel
                         value="dark"
