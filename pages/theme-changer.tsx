@@ -1,3 +1,4 @@
+import React, { ChangeEvent, useState } from "react";
 import {
    Card,
    CardContent,
@@ -7,17 +8,24 @@ import {
    Radio,
    RadioGroup,
 } from "@mui/material";
-import React from "react";
 import { Layout } from "../components/layouts";
 
 const ThemeChagerPage = () => {
+   const [currentTheme, setCurrentTheme] = useState("light");
+
+   const onThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
+      const seletedTheme = event.target.value;
+      setCurrentTheme(seletedTheme);
+      console.log(seletedTheme);
+   };
+
    return (
       <Layout>
          <Card>
             <CardContent>
                <FormControl>
                   <FormLabel>Tema</FormLabel>
-                  <RadioGroup>
+                  <RadioGroup value={currentTheme} onChange={onThemeChange}>
                      <FormControlLabel
                         value="light"
                         control={<Radio />}
