@@ -1,7 +1,9 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
+import axios from "axios";
 
 import {
+   Button,
    Card,
    CardContent,
    FormControl,
@@ -20,10 +22,20 @@ const ThemeChagerPage: FC = (props) => {
    const onThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
       const seletedTheme = event.target.value;
       setCurrentTheme(seletedTheme);
+
+      localStorage.setItem("theme", seletedTheme);
       Cookies.set("theme", seletedTheme);
    };
 
-   // useEffect(() => {}, []);
+   const onClick = async () => {
+      const { data } = await axios.get("/api/hello");
+      console.log({ data });
+   };
+
+   useEffect(() => {
+      console.log("LocalStorage", localStorage.getItem("theme"));
+      console.log("Cookies", Cookies.get("theme"));
+   }, []);
 
    return (
       <Layout>
@@ -49,6 +61,8 @@ const ThemeChagerPage: FC = (props) => {
                      />
                   </RadioGroup>
                </FormControl>
+
+               <Button onClick={onClick}>Solicitud</Button>
             </CardContent>
          </Card>
       </Layout>
