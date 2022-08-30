@@ -15,9 +15,13 @@ import {
 import { Layout } from "../components/layouts";
 import Cookies from "js-cookie";
 
-const ThemeChagerPage: FC = (props) => {
-   console.log({ props });
-   const [currentTheme, setCurrentTheme] = useState("light");
+interface Props {
+   theme: string;
+}
+
+const ThemeChagerPage: FC<Props> = ({ theme }) => {
+   // console.log({ props });
+   const [currentTheme, setCurrentTheme] = useState(theme);
 
    const onThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
       const seletedTheme = event.target.value;
@@ -78,10 +82,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
    // const cookies = req.cookies
    const { theme = "light", name = "no name" } = req.cookies;
 
+   const validThemes = ["light", "dark", "custom"];
+
    console.log(req);
    return {
       props: {
-         theme,
+         theme: validThemes.includes(theme) ? theme : "dark",
          name,
       },
    };
